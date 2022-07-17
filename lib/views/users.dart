@@ -1,6 +1,8 @@
 import 'package:clothes_mvvm/model/user.dart';
-import 'package:clothes_mvvm/repo/user_services.dart';
+import 'package:clothes_mvvm/repo/usersApi.dart';
+import 'package:clothes_mvvm/views_model/users_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class users extends StatefulWidget {
   const users({Key? key}) : super(key: key);
@@ -10,17 +12,20 @@ class users extends StatefulWidget {
 }
 
 class _usersState extends State<users> {
-  late Future<List<User>> UsersData;
+  // late Future<List<User>> UsersData;
 
   @override
   void initState() {
     super.initState();
-    UsersData = User_services.getUsers();
+    //  UsersData = UserApi.getUsers();
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<User>>(
+    UserViewModel usersProvider = Provider.of(context);
+    usersProvider.getusers();
+    return Text(usersProvider.usersList[0].name!);
+    /* FutureBuilder<List<User>>(
         future: UsersData,
         builder: (context, AsyncSnapshot<List<User>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -37,5 +42,6 @@ class _usersState extends State<users> {
           }
           return Container();
         });
+  */
   }
 }
