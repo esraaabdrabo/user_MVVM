@@ -6,6 +6,12 @@ import 'package:flutter/cupertino.dart';
 class UserViewModel extends ChangeNotifier {
   List<User> usersList = [];
   bool loading = false;
+  List<String> leftDetailsHeadLines = [
+    'name: ',
+    'email: ',
+    'phone: ',
+    'website: '
+  ];
   void setLoading(bool trueOrFalse) async {
     loading = trueOrFalse;
     notifyListeners();
