@@ -5,8 +5,18 @@ import 'package:flutter/cupertino.dart';
 
 class UserViewModel extends ChangeNotifier {
   List<User> usersList = [];
-  Future<void> getusers() async {
-    usersList = await UserApi.getUsers();
+  bool loading = false;
+  void setLoading(bool trueOrFalse) async {
+    loading = trueOrFalse;
     notifyListeners();
+  }
+
+  UserViewModel() {
+    getusers();
+  }
+  getusers() async {
+    setLoading(true);
+    usersList = await UserApi.getUsers();
+    setLoading(false);
   }
 }

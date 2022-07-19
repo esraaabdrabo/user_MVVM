@@ -16,9 +16,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => UserViewModel(),
       child: const MaterialApp(
-        title: 'Flutter Demo',
-        home: users(),
-      ),
+          title: 'Flutter Demo', home: Scaffold(body: Users_details())),
     );
   }
 }
