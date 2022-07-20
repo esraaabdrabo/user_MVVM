@@ -7,7 +7,7 @@ class Response {
         response.add(User.fromJson(jsonList[i]));
       }
     } else {
-      print('response is empty list');
+      // print('response is empty list');
     }
   }
 }
@@ -37,18 +37,20 @@ class User {
     if (json["name"] is String) name = json["name"];
     if (json["username"] is String) username = json["username"];
     if (json["email"] is String) email = json["email"];
-    if (json["address"] is Map)
+    if (json["address"] is Map) {
       address =
           json["address"] == null ? null : Address.fromJson(json["address"]);
+    }
     if (json["phone"] is String) phone = json["phone"];
     if (json["website"] is String) website = json["website"];
-    if (json["company"] is Map)
+    if (json["company"] is Map) {
       company =
           json["company"] == null ? null : Company.fromJson(json["company"]);
+    }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["id"] = id;
     data["name"] = name;
     data["username"] = username;
@@ -75,7 +77,7 @@ class Company {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["name"] = name;
     data["catchPhrase"] = catchPhrase;
     data["bs"] = bs;
@@ -102,12 +104,13 @@ class Address {
     if (json["suite"] is String) suite = json["suite"];
     if (json["city"] is String) city = json["city"];
     if (json["zipcode"] is String) zipcode = json["zipcode"];
-    if (json["geo"] is Map)
+    if (json["geo"] is Map) {
       geo = json["geo"] == null ? null : Geo.fromJson(json["geo"]);
+    }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["street"] = street;
     data["suite"] = suite;
     data["city"] = city;
@@ -129,7 +132,7 @@ class Geo {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["lat"] = lat;
     data["lng"] = lng;
     return data;
