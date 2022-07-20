@@ -1,4 +1,5 @@
 import 'package:clothes_mvvm/model/user.dart';
+import 'package:clothes_mvvm/views/user.dart';
 import 'package:clothes_mvvm/views_model/users_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +10,13 @@ class Users_details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserViewModel usersProvider = context.watch<UserViewModel>();
-    return userRow(usersProvider);
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Users Data'),
+          centerTitle: true,
+          backgroundColor: Color.fromARGB(158, 0, 0, 255),
+        ),
+        body: userRow(usersProvider));
   }
 }
 
@@ -27,48 +34,24 @@ Widget userRow(UserViewModel usersProvider) {
         },
         itemCount: UsersData.length,
         itemBuilder: (context, index) {
-          return Column(
-            children: [
-              //headline Name
-              Container(
-                alignment: Alignment.topLeft,
-                child: Text(
+          return InkWell(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => userDetails(UsersData[index])));
+            },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                //headline Name
+                Text(
                   UsersData[index].name!,
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  //left details
-                  Container(
-                    width: MediaQuery.of(context).size.width * .4,
-                    alignment: Alignment.topLeft,
-                    child: Column(
-                      children: [
-                        Text(
-                            '${usersProvider.leftDetailsHeadLines[0]} ${UsersData[index].username!}'),
-                        Text(
-                            '${usersProvider.leftDetailsHeadLines[1]} ${UsersData[index].email!}'),
-                        Text(
-                            '${usersProvider.leftDetailsHeadLines[2]} ${UsersData[index].phone!}'),
-                        Text(
-                            '${usersProvider.leftDetailsHeadLines[3]}${UsersData[index].website!}'),
-                      ],
-                    ),
-                  ),
-
-                  //right details
-                  Column(
-                    children: [
-                      Text(UsersData[index].company!.name),
-                      Text('Address'),
-                      Text(UsersData[index].address!.city!),
-                      Text(UsersData[index].address!.street!),
-                    ],
-                  )
-                ],
-              )
-            ],
+                Text(
+                    '${usersProvider.leftDetailsHeadLines[1]} ${UsersData[index].email!}')
+              ],
+            ),
           );
         });
   }
