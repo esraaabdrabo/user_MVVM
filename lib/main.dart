@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => UserViewModel(),
-      child: const MaterialApp(title: 'Flutter Demo', home: UsersDetails()),
+      child: const MaterialApp(home: UsersDetails()),
     );
   }
 }

@@ -63,8 +63,7 @@ Widget userRow(UserViewModel usersProvider) {
                   Text(
                     userData[index].name!,
                   ),
-                  Text(
-                      '${usersProvider.leftDetailsHeadLines[1]} ${userData[index].email!}')
+                  Text('Email : ${userData[index].email!}')
                 ],
               ),
             ),
